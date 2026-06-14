@@ -1,6 +1,11 @@
 #include <iostream>
 #include <fstream>
 
+#include "misc.hpp"
+#include "error.hpp"
+
+using namespace TheeCode;
+
 // Running without any arguments will print a guide on how to use
 // the app, while running with a filename will result in it running
 // that file.
@@ -20,11 +25,10 @@ int main(int argc, char** argv) {
         std::ifstream file(filename);
 
         if (!file.is_open()) {
-            std::cerr << "\n\033[31m" << "[TheeCode]: Failed to open file " << filename << "\033[0m\n" << std::endl;
-            return 1;
+            raise_error(ErrorType::CannotOpenFileError, "Failed to open \"" + filename + '"');
         }
 
-        std::cout << "\n\033[32m" << "[TheeCode]: Successfully opened file!" << "\033[0m\n" << std::endl;
+        std::cout << GREEN << "[TheeCode]: Successfully opened file!" << RESET << std::endl;
         
     }
 
