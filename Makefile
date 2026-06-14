@@ -27,4 +27,4 @@ $(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) $(OBJS) -o $(TARGET)
 
 clean:
-	rm -f obj/*.o $(TARGET)
+	rm -f src/*.o $(TARGET)

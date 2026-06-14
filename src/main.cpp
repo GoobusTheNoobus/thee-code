@@ -14,17 +14,17 @@ int main(int argc, char** argv) {
                   << "   theecode app.kkz\n" 
                   << "\nThat's basically it. Goobye now!\n" 
                   << std::endl; 
-        return 1;
+        return 0;
     } else {
         std::string filename = argv[1];
         std::ifstream file(filename);
 
         if (!file.is_open()) {
-            std::cerr << "\033[31m" << "[TheeCode]: Failed to open file " << filename << "\033[0m" << std::endl;
+            std::cerr << "\n\033[31m" << "[TheeCode]: Failed to open file " << filename << "\033[0m\n" << std::endl;
             return 1;
         }
 
-        std::cout << "\033[32m" << "[TheeCode]: Successfully opened file!" << "\033[0m" << std::endl;
+        std::cout << "\n\033[32m" << "[TheeCode]: Successfully opened file!" << "\033[0m\n" << std::endl;
         
     }
 
