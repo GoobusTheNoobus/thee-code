@@ -7,3 +7,4 @@ To run, use `./theecode.exe`.
 
 # Developers
 - @GoobusTheNoobus
+- @Nerdvokado
