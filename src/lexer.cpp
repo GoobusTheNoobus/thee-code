@@ -1,6 +1,10 @@
 #include "lexer.hpp"
 
+#include <array>
+
 namespace TheeCode {
+
+    std::array<std::string, 9> KEYWORDS = {"fn", "prt", "let", "const", "for", "if", "else", "return", "while"};
 
     TokenList Lexer::tokenize() {
         TokenList list;
@@ -27,6 +31,43 @@ namespace TheeCode {
             }
         }
 
+        list.push_back(Token::make_eof());
+
         return list;
+    }
+
+    void Lexer::parse_word(TokenList& list) {
+        std::string word = {cur()};
+
+        next();
+        while (!end()) {
+            char c = cur();
+
+            if (std::isalnum(c) || c == '_') {
+                word += c;
+            } else {
+                break;
+            }
+
+            next();
+
+        }
+
+        for (auto keyword: KEYWORDS) {
+            if (word == keyword) {
+                list.push_back({Token::TokenType::Keyword, word});
+                return;
+            }
+        }
+
+        list.push_back({Token::TokenType::Identifier, word});
+    }
+
+    void Lexer::parse_string(TokenList& list) {
+        // TODO: parse the entire string
+    }
+
+    void Lexer::parse_number(TokenList& list) {
+        // TODO: parse an integer
     }
 }
