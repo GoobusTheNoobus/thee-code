@@ -9,7 +9,8 @@ namespace TheeCode {
 
         enum class TokenType {
             Identifier,
-            Number,
+            Integer,
+            Float,
             String,
             Keyword,
             Operator,
@@ -30,7 +31,8 @@ namespace TheeCode {
         inline static std::string token_type_to_string(TokenType type) {
             switch (type) {
                 case TokenType::Identifier: return "Identifier";
-                case TokenType::Number: return "Number";
+                case TokenType::Integer: return "Integer";
+                case TokenType::Float: return "Float";
                 case TokenType::String: return "String";
                 case TokenType::Keyword: return "Keyword";
                 case TokenType::Operator: return "Operator";
@@ -44,6 +46,10 @@ namespace TheeCode {
 
         inline static Token make_eof() {
             return Token(TokenType::EndOfFile, "");
+        }
+
+        inline std::string to_string() {
+            return "{ " + token_type_to_string(type) + ", \"" + data + "\" }";
         }
     };
 

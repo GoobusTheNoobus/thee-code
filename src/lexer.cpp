@@ -1,4 +1,5 @@
 #include "lexer.hpp"
+#include "error.hpp"
 
 #include <array>
 
@@ -11,6 +12,11 @@ namespace TheeCode {
 
         while (!end()) {
             const char c = cur();
+
+            if (std::isspace(c)) {
+                next();
+                continue;
+            }
 
             if (std::isalpha(c) || c == '_') {
                 parse_word(list);
@@ -28,6 +34,8 @@ namespace TheeCode {
                 } else {
                     list.push_back({Token::TokenType::Operator, {c}});
                 }
+
+                next();
             }
         }
 
@@ -37,8 +45,9 @@ namespace TheeCode {
     }
 
     void Lexer::parse_word(TokenList& list) {
-        std::string word = {cur()};
+        std::string word = "";
 
+        word.push_back(cur());
         next();
         while (!end()) {
             char c = cur();
@@ -64,10 +73,85 @@ namespace TheeCode {
     }
 
     void Lexer::parse_string(TokenList& list) {
-        // TODO: parse the entire string
+        std::string string = "";
+        bool terminated = false;
+
+        next();
+        while (!end()) {
+            char c = cur();
+
+            if (c == '"') {
+                next();
+                terminated = true;
+                break;
+            }
+
+            // Escape character '\'
+            if (c == '\\') {
+                next();
+                if (end()) {
+                    raise_error(ErrorType::SyntaxError, "Unterminated escape sequence");
+                }
+
+                char escape_c = cur();
+
+                switch (escape_c) {
+                    case 'n': string.push_back('\n'); break;
+                    case 'r': string.push_back('\r'); break;
+                    case 't': string.push_back('\t'); break;
+                    case '\\': string.push_back('\\'); break;
+                    case '"': string.push_back('"'); break;
+                    default:
+                        raise_error(ErrorType::SyntaxError, "Unexpected escape sequence '\\" + std::string(1, escape_c) + "'");
+                }
+
+            } else 
+                string.push_back(c);
+
+            next();
+        }
+
+        if (!terminated) {
+            raise_error(ErrorType::SyntaxError, "Unterminated string literal");
+        }
+
+        list.push_back({Token::TokenType::String, string});
     }
 
+    // When the start of a token is a number, it can either be an integer or a decimal
     void Lexer::parse_number(TokenList& list) {
-        // TODO: parse an integer
+        std::string num_str = "";
+
+        bool is_float = false;
+
+        while (!end()) {
+            char c = cur();
+
+            if (std::isdigit(c)) {
+                num_str.push_back(c);
+                next();
+            } 
+
+            else if (std::isalnum(c)) {
+                raise_error(ErrorType::SyntaxError, is_float ? "Extra text after float literal" : "Extra text after integer literal");
+            }
+            
+            else if (c == '.') {
+                if (is_float) {
+                    raise_error(ErrorType::SyntaxError, "Extra dot in float literal");
+                } 
+
+                is_float = true;
+                num_str.push_back(c);
+                next();
+            } else break;
+            
+        }
+        
+        if (is_float && num_str.back() == '.') {
+            raise_error(ErrorType::SyntaxError, "Incomplete float literal");
+        }
+
+        list.push_back({is_float ? Token::TokenType::Float : Token::TokenType::Integer, num_str});
     }
 }

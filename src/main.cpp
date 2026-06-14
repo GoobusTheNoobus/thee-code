@@ -1,8 +1,10 @@
 #include <iostream>
 #include <fstream>
+#include <sstream>
 
 #include "misc.hpp"
 #include "error.hpp"
+#include "lexer.hpp"
 
 using namespace TheeCode;
 
@@ -29,7 +31,20 @@ int main(int argc, char** argv) {
         }
 
         std::cout << GREEN << "[TheeCode]: Successfully opened file!" << RESET << std::endl;
+        std::cout << "Converting file to string...\n";
         
+        std::stringstream buffer;
+        buffer << file.rdbuf();
+
+        Lexer jerry(buffer.str());
+        
+        std::cout << "Tokenizing...\n";
+
+        TokenList tokens = jerry.tokenize();
+        
+        for (Token token : tokens) {
+            std::cout << token.to_string() << std::endl;
+        }
     }
 
     return 0;
