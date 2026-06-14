@@ -13,6 +13,12 @@ namespace TheeCode {
         while (!end()) {
             const char c = cur();
 
+            if (c == '\n') {
+                list.push_back({Token::TokenType::NewLine, ""});
+                next();
+                continue;
+            }
+
             if (std::isspace(c)) {
                 next();
                 continue;

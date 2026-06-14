@@ -17,6 +17,8 @@ namespace TheeCode {
             RoundBracket,
             SquareBracket,
             CurlyBracket,
+
+            NewLine,
             EndOfFile
         };
 
@@ -40,6 +42,7 @@ namespace TheeCode {
                 case TokenType::RoundBracket: return "RoundBracket";
                 case TokenType::SquareBracket: return "SquareBracket";
                 case TokenType::CurlyBracket: return "CurlyBracket";
+                case TokenType::NewLine: return "NewLine";
                 default: return "Unknown";
             }
         }
