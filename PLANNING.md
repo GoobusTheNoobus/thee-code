@@ -12,7 +12,7 @@ Our language's philosophy:
 let num1 = 67
 let num2 = num1 * 2 + 5 / 4
 
-prt "Number 1: " num1 " Number 2: " num2 nl
-prt "Diff: " math.abs(num2 - num1) nl
+log "Number 1: " num1 " Number 2: " num2;
+log "Diff: " math.abs(num2 - num1);
 
 ```

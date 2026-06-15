@@ -22,7 +22,7 @@ namespace TheeCode {
         int index = 0;
 
         inline void next() { ++index; }
-        inline char cur() { return file[index]; }
+        inline char current() { return file[index]; }
         inline char peek() { return file[index + 1]; }
         inline bool end() { return index >= len; }
 

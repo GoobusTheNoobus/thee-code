@@ -5,15 +5,15 @@
 
 namespace TheeCode {
 
-    std::array<std::string, 2> KEYWORDS = {"prt", "let"};
+    std::array<std::string, 2> KEYWORDS = {"log", "let"};
 
     TokenList Lexer::tokenize() {
         TokenList list;
 
         while (!end()) {
-            const char c = cur();
+            const char c = current();
 
-            if (c == '\n') {
+            if (c == ';') {
                 list.push_back({Token::TokenType::NewLine, ""});
                 next();
                 continue;
@@ -53,10 +53,10 @@ namespace TheeCode {
     void Lexer::parse_word(TokenList& list) {
         std::string word = "";
 
-        word.push_back(cur());
+        word.push_back(current());
         next();
         while (!end()) {
-            char c = cur();
+            char c = current();
 
             if (std::isalnum(c) || c == '_') {
                 word += c;
@@ -84,7 +84,7 @@ namespace TheeCode {
 
         next();
         while (!end()) {
-            char c = cur();
+            char c = current();
 
             if (c == '"') {
                 next();
@@ -99,7 +99,7 @@ namespace TheeCode {
                     raise_error(ErrorType::SyntaxError, "Unterminated escape sequence");
                 }
 
-                char escape_c = cur();
+                char escape_c = current();
 
                 switch (escape_c) {
                     case 'n': string.push_back('\n'); break;
@@ -131,7 +131,7 @@ namespace TheeCode {
         bool is_float = false;
 
         while (!end()) {
-            char c = cur();
+            char c = current();
 
             if (std::isdigit(c)) {
                 num_str.push_back(c);
