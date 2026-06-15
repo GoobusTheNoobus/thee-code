@@ -14,7 +14,7 @@ namespace TheeCode {
             const char c = current();
 
             if (c == ';') {
-                list.push_back({Token::TokenType::NewLine, ""});
+                list.push_back({Token::TokenType::SemiColon, ";"});
                 next();
                 continue;
             }
