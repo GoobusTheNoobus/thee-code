@@ -5,7 +5,7 @@
 
 namespace TheeCode {
 
-    std::array<std::string, 9> KEYWORDS = {"fn", "prt", "let", "const", "for", "if", "else", "return", "while"};
+    std::array<std::string, 2> KEYWORDS = {"prt", "let"};
 
     TokenList Lexer::tokenize() {
         TokenList list;

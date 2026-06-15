@@ -10,6 +10,7 @@ namespace TheeCode {
     using TokenList = std::vector<Token>;
 
     class Lexer {
+        
         public:
         Lexer(std::string file) : file(file), len(file.size()) {};
 
