@@ -18,7 +18,7 @@ int main(int argc, char** argv) {
                   << "Developer list can also be found in README.md.\n" 
                   << "\n"
                   << "To run an app, run: \n" 
-                  << "   theecode app.kkz\n" 
+                  << "   theecode app.thcd\n" 
                   << "\nThat's basically it. Goobye now!\n" 
                   << std::endl; 
         return 0;
