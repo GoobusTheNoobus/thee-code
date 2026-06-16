@@ -11,6 +11,9 @@ namespace TheeCode {
         MathError,
         TypeError,
 
+        PreruntimeError,
+        UnimplementedError, // Will likely be used a lot at this stage
+
         CannotOpenFileError,
     };
 
@@ -20,6 +23,7 @@ namespace TheeCode {
             case ErrorType::MathError: return "[TheeCode].MathError";
             case ErrorType::TypeError: return "[TheeCode].TypeError";
             case ErrorType::CannotOpenFileError: return "[TheeCode].CannotOpenFileError";
+            case ErrorType::PreruntimeError: return "[TheeCode].PreruntimeError";
             default:
                 return "[TheeCode].UndefinedError";
         }
