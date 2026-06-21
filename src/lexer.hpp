@@ -18,8 +18,8 @@ namespace TheeCode {
 
         private:
         std::string file;
-        int len;
-        int index = 0;
+        size_t len;
+        size_t index = 0;
 
         inline void next() { ++index; }
         inline char current() { return file[index]; }

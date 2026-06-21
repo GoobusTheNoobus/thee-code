@@ -9,10 +9,9 @@ Our language's philosophy:
 
 # Syntax Style
 ```
-let num1 = 67
-let num2 = num1 * 2 + 5 / 4
+let num1 = 67;
+let num2 = num1 * 2 + 5 / 4;
 
-log "Number 1: " num1 " Number 2: " num2;
-log "Diff: " math.abs(num2 - num1);
+log "Number 1: " num1 " Number 2: " num2 nl;
 
 ```

@@ -65,7 +65,6 @@ namespace TheeCode {
             }
 
             next();
-
         }
 
         for (auto keyword: KEYWORDS) {

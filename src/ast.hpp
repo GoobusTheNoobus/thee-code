@@ -17,7 +17,7 @@ namespace TheeCode {
         BinaryExpr,
 
         VarDeclaration,
-        Print,
+        Log,
 
         Root,
         EndOfFile,
@@ -104,14 +104,14 @@ namespace TheeCode {
         }
     };
 
-    struct PrtStatementNode : ASTNode{
+    struct LogStatementNode : ASTNode{
 
         std::vector<ASTReference> params;
          
-        PrtStatementNode(std::vector<ASTReference> params) {
-            node_type = ASTNodeType::Print;
+        LogStatementNode() {
+            node_type = ASTNodeType::Log;
 
-            this->params = std::move(params);
+            this->params = std::vector<ASTReference>();
         }
     };
 
