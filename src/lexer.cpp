@@ -13,7 +13,7 @@ namespace TheeCode {
         while (!end()) {
             const char c = current();
 
-            if (c == ';') {
+            if (c == 'nl' || c == '\\n') {
                 list.push_back({Token::TokenType::NewLine, ""});
                 next();
                 continue;
